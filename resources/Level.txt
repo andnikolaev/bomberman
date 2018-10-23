@@ -1,0 +1,31 @@
+5 13 31
+###############################
+#p * *314     *  ** * *      *#
+# # # # #*# # #*# # # # # #*# #
+#    * * *** **  5   *    **  #
+# #*# # # # #4# #b#1# # # # #*#
+#          *     **      *  **#
+# # #*# # # # # #*#*#*#*# # # #
+#   *        *   * *x* *   4  #
+# # # # #*# # # # # # #*# #*# #
+#   ****         *2           #
+# # # # # # # # # #*# # # # #*#
+#  ** *5  *    2              #
+###############################
+
+Meta data(First li):
+Level_number Row_number Column_number
+
+Level elements:
+# - Wall
+* - Brick(can be destroyed)
+x - Portal(on the next level, may be)
+
+p - Player
+1 - EasyAI
+2 - MediumAI
+
+Boosters:
+b - Increase maximum bomb count
+f - Increase bomb flame
+s - Increase player speed
