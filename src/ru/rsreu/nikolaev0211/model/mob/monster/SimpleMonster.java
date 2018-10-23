@@ -1,11 +1,12 @@
 package ru.rsreu.nikolaev0211.model.mob.monster;
 
-import ru.rsreu.nikolaev0211.events.EventManager;
+import ru.rsreu.nikolaev0211.events.EventType;
 import ru.rsreu.nikolaev0211.model.Game;
-import ru.rsreu.nikolaev0211.model.GameData;
+import ru.rsreu.nikolaev0211.model.GameState;
 import ru.rsreu.nikolaev0211.model.UpdatableModel;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
 import ru.rsreu.nikolaev0211.model.mob.monster.AI.AI;
+import ru.rsreu.nikolaev0211.model.mob.move.MoveDirection;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirectionType;
 
 public class SimpleMonster extends Mob {
@@ -19,12 +20,25 @@ public class SimpleMonster extends Mob {
     //TODO: выбор направления движения и движение
     @Override
     public void calculateMove() {
-        ai.calculateDirection();
+        this.moveDirection = ai.calculateDirection();
+        this.isMoving = true;
+        MoveDirection moveDirection = this.moveDirection.getMoveDirection();
+        this.move(moveDirection.getX() * this.mobSpeed, moveDirection.getY() * this.mobSpeed);
+        this.gameModel.update(EventType.MODEL_UPDATE);
     }
 
     @Override
     public void run() {
-
+        while (this.isAlive) {
+            if (GameState.RUNNING.equals(Game.getGameState())) {
+             //   calculateMove();
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -32,23 +46,4 @@ public class SimpleMonster extends Mob {
         return super.toString();
     }
 
-    @Override
-    public void moveUp(boolean isMove) {
-
-    }
-
-    @Override
-    public void moveDown(boolean isMove) {
-
-    }
-
-    @Override
-    public void moveLeft(boolean isMove) {
-
-    }
-
-    @Override
-    public void moveRight(boolean isMove) {
-
-    }
 }

@@ -10,17 +10,20 @@ public class GameController {
     }
 
     public void keyPressed(int keyCode) {
-        MovableEventType eventType = MovableEventType.getMovableOperationByKeyCode(keyCode);
-        if (eventType != null) {
-            System.out.println("Controller");
-            eventType.startMoving(game.getPlayer());
+        MovableEventType movableEventType = MovableEventType.getMovableOperationByKeyCode(keyCode);
+        if (movableEventType != null) {
+            movableEventType.startMoving(game.getPlayer());
+        }
+        GameEventType gameEventType = GameEventType.getGameEventByKeyCode(keyCode);
+        if (gameEventType != null) {
+            gameEventType.startAction(game);
         }
     }
 
     public void keyReleased(int keyCode) {
-        MovableEventType eventType = MovableEventType.getMovableOperationByKeyCode(keyCode);
-        if (eventType != null) {
-            eventType.stopMoving(game.getPlayer());
+        MovableEventType movableEventType = MovableEventType.getMovableOperationByKeyCode(keyCode);
+        if (movableEventType != null) {
+            movableEventType.stopMoving(game.getPlayer());
         }
     }
 }

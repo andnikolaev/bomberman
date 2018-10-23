@@ -1,9 +1,7 @@
 package ru.rsreu.nikolaev0211.model.mob;
 
-import ru.rsreu.nikolaev0211.events.EventManager;
 import ru.rsreu.nikolaev0211.events.EventType;
 import ru.rsreu.nikolaev0211.model.Game;
-import ru.rsreu.nikolaev0211.model.GameData;
 import ru.rsreu.nikolaev0211.model.GameState;
 import ru.rsreu.nikolaev0211.model.UpdatableModel;
 import ru.rsreu.nikolaev0211.model.mob.move.Movable;
@@ -42,27 +40,8 @@ public class Player extends Mob implements Movable {
     @Override
     public void calculateMove() {
         MoveDirection moveDirection = this.moveDirection.getMoveDirection();
-        move(moveDirection.getX() * this.mobSpeed, moveDirection.getY() * this.mobSpeed);
-        this.gameModel.update();
-    }
-
-    public boolean canMove(double x, double y) {
-        //For all corner of mob
-        for (int c = 0; c < 4; c++) {
-
-        }
-
-        return true;
-    }
-
-    public void move(double x, double y) {
-        if (canMove(0, y)) {
-            this.y += y;
-        }
-
-        if (canMove(x, 0)) {
-            this.x += x;
-        }
+        this.move(moveDirection.getX() * this.mobSpeed, moveDirection.getY() * this.mobSpeed);
+        this.gameModel.update(EventType.MODEL_UPDATE);
     }
 
     @Override
@@ -77,6 +56,14 @@ public class Player extends Mob implements Movable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public double getX() {
+        return super.x;
+    }
+
+    public double getY() {
+        return super.y;
     }
 
     @Override

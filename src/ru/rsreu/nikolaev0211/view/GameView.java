@@ -11,19 +11,19 @@ public class GameView implements EventListener, Runnable {
 
     @Override
     public void update(GameData gameData) {
-        needUpdate =true;
+        needUpdate = true;
         this.gameData = gameData;
     }
 
     @Override
     public void run() {
         while (true) {
-            if(needUpdate){
+            if (needUpdate) {
                 System.out.println(gameData);
             }
             needUpdate = false;
             try {
-                Thread.sleep(100);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

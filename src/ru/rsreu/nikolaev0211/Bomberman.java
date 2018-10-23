@@ -13,6 +13,7 @@ import ru.rsreu.nikolaev0211.model.mob.monster.AI.EasyAI;
 import ru.rsreu.nikolaev0211.model.mob.monster.SimpleMonster;
 import ru.rsreu.nikolaev0211.view.GameView;
 import ru.rsreu.nikolaev0211.view.Keyboard;
+import sun.security.krb5.internal.TGSRep;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -46,11 +47,15 @@ public class Bomberman {
         Keyboard keyboard = new Keyboard(gameController);
 
         Game.setGameState(GameState.RUNNING);
-        game.getEventManager().subscribe(EventType.MODEL_UPDATE,gameView);
+        game.getEventManager().subscribe(EventType.MODEL_UPDATE, gameView);
         Thread thread = new Thread(player);
         thread.start();
-        Thread thread1 = new Thread(gameView);
-        thread1.start();
+        for (Mob mob : monsterList) {
+            thread = new Thread(mob);
+            thread.start();
+        }
+        thread = new Thread(gameView);
+        thread.start();
         testGui(keyboard);
     }
 
