@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Game implements UpdatableModel, GamableAction {
-    private static GameState gameState;
+    private volatile static GameState gameState;
     private GameField gameField;
     private List<Mob> monsters;
     private Player player;

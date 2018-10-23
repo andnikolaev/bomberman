@@ -31,7 +31,7 @@ public class SimpleMonster extends Mob {
     public void run() {
         while (this.isAlive) {
             if (GameState.RUNNING.equals(Game.getGameState())) {
-             //   calculateMove();
+//                calculateMove();
             }
             try {
                 Thread.sleep(100);
