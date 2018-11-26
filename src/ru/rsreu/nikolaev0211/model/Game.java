@@ -5,13 +5,15 @@ import ru.rsreu.nikolaev0211.events.EventType;
 import ru.rsreu.nikolaev0211.model.bomb.Bomb;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
 import ru.rsreu.nikolaev0211.model.mob.Player;
+import ru.rsreu.nikolaev0211.model.mob.monster.AI.EasyAI;
+import ru.rsreu.nikolaev0211.model.mob.monster.SimpleMonster;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Game implements UpdatableModel, GamableAction {
-    private volatile static GameState gameState;
+public class Game implements UpdatableModel, BombermanAction {
+    private volatile static GameState gameState = GameState.NEW;
     private GameField gameField;
     private List<Mob> monsters;
     private Player player;
@@ -19,8 +21,40 @@ public class Game implements UpdatableModel, GamableAction {
     private List<Bomb> bombs;
 
     public Game(EventManager eventManager) {
-        Game.gameState = GameState.PAUSED;
         this.eventManager = eventManager;
+        initModel();
+        startModel();
+    }
+
+    private void initModel() {
+        Player player = new Player(0, 0, 1, this);
+        List<Mob> monsterList = new ArrayList<Mob>();
+        monsterList.add(new SimpleMonster(0, 0, 1, this, new EasyAI()));
+        monsterList.add(new SimpleMonster(0, 0, 1, this, new EasyAI()));
+
+        GameField gameField = new GameField();
+        setGameField(gameField);
+        setMonsters(monsterList);
+        setPlayer(player);
+    }
+
+    private void startModel() {
+        Thread thread = new Thread(player);
+        thread.start();
+        for (Mob mob : monsters) {
+            thread = new Thread(mob);
+            thread.start();
+        }
+    }
+
+    public void newGame() {
+        eventManager.notify(EventType.MODEL_UPDATE, new GameData(gameField, monsters, player, bombs, gameState));
+    }
+
+    @Override
+    public void start() {
+        gameState = GameState.RUNNING;
+        eventManager.notify(EventType.MODEL_UPDATE, new GameData(gameField, monsters, player, bombs, gameState));
     }
 
     @Override

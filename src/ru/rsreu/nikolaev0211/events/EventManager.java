@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EventManager {
+public class EventManager implements Subscriber {
     private Map<String, List<EventListener>> listeners = new HashMap<String, List<EventListener>>();
 
     public EventManager(EventType... operations) {
@@ -23,8 +23,7 @@ public class EventManager {
 
     public void unsubscribe(EventType eventType, EventListener listener) {
         List<EventListener> users = listeners.get(eventType.name());
-        int index = users.indexOf(listener);
-        users.remove(index);
+        users.remove(listener);
     }
 
     public void notify(EventType eventType, GameData gameData) {

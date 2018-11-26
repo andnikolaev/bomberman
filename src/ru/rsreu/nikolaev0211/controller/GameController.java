@@ -1,5 +1,7 @@
 package ru.rsreu.nikolaev0211.controller;
 
+import ru.rsreu.nikolaev0211.events.GameEventType;
+import ru.rsreu.nikolaev0211.events.MovableEventType;
 import ru.rsreu.nikolaev0211.model.Game;
 
 public class GameController {
@@ -9,21 +11,21 @@ public class GameController {
         this.game = game;
     }
 
-    public void keyPressed(int keyCode) {
-        MovableEventType movableEventType = MovableEventType.getMovableOperationByKeyCode(keyCode);
-        if (movableEventType != null) {
-            movableEventType.startMoving(game.getPlayer());
-        }
-        GameEventType gameEventType = GameEventType.getGameEventByKeyCode(keyCode);
-        if (gameEventType != null) {
-            gameEventType.startAction(game);
-        }
+
+    public void startMoving(MovableEventType movableEventType) {
+        movableEventType.startMoving(game.getPlayer());
     }
 
-    public void keyReleased(int keyCode) {
-        MovableEventType movableEventType = MovableEventType.getMovableOperationByKeyCode(keyCode);
-        if (movableEventType != null) {
-            movableEventType.stopMoving(game.getPlayer());
-        }
+    public void stopMoving(MovableEventType movableEventType) {
+        movableEventType.stopMoving(game.getPlayer());
     }
+
+    public void startAction(GameEventType gameEventType) {
+        gameEventType.startAction(game);
+    }
+
+    public void newGame() {
+        game.newGame();
+    }
+    
 }
