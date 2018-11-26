@@ -1,22 +1,28 @@
-package ru.rsreu.nikolaev0211.controller;
+package ru.rsreu.nikolaev0211.events;
 
-import ru.rsreu.nikolaev0211.model.GamableAction;
+import ru.rsreu.nikolaev0211.model.BombermanAction;
 
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public enum GameEventType {
-
+    START(Collections.singletonList(KeyEvent.VK_ENTER)) {
+        @Override
+        public void startAction(BombermanAction game) {
+            game.start();
+        }
+    },
     PAUSE(Arrays.asList(KeyEvent.VK_P, KeyEvent.VK_O)) {
         @Override
-        void startAction(GamableAction game) {
+        public void startAction(BombermanAction game) {
             game.pause(!game.isPaused());
         }
     },
     BOMB(Arrays.asList(KeyEvent.VK_SPACE, KeyEvent.VK_ALT)) {
         @Override
-        void startAction(GamableAction game) {
+        public void startAction(BombermanAction game) {
             game.placeBomb();
         }
     };
@@ -42,5 +48,5 @@ public enum GameEventType {
         return keyCodes;
     }
 
-    abstract void startAction(GamableAction game);
+    public abstract void startAction(BombermanAction game);
 }

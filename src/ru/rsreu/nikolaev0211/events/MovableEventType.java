@@ -1,4 +1,4 @@
-package ru.rsreu.nikolaev0211.controller;
+package ru.rsreu.nikolaev0211.events;
 
 import ru.rsreu.nikolaev0211.model.mob.move.Movable;
 
@@ -9,45 +9,45 @@ import java.util.List;
 public enum MovableEventType {
     UP(Arrays.asList(KeyEvent.VK_UP, KeyEvent.VK_W)) {
         @Override
-        void startMoving(Movable entity) {
+        public void startMoving(Movable entity) {
             entity.moveUp(true);
         }
 
         @Override
-        void stopMoving(Movable entity) {
+        public void stopMoving(Movable entity) {
             entity.moveUp(false);
         }
     },
     LEFT(Arrays.asList(KeyEvent.VK_LEFT, KeyEvent.VK_A)) {
         @Override
-        void startMoving(Movable entity) {
+        public void startMoving(Movable entity) {
             entity.moveLeft(true);
         }
 
         @Override
-        void stopMoving(Movable entity) {
+        public void stopMoving(Movable entity) {
             entity.moveLeft(false);
         }
     },
     DOWN(Arrays.asList(KeyEvent.VK_DOWN, KeyEvent.VK_S)) {
         @Override
-        void startMoving(Movable entity) {
+        public void startMoving(Movable entity) {
             entity.moveDown(true);
         }
 
         @Override
-        void stopMoving(Movable entity) {
+        public void stopMoving(Movable entity) {
             entity.moveDown(false);
         }
     },
     RIGHT(Arrays.asList(KeyEvent.VK_RIGHT, KeyEvent.VK_D)) {
         @Override
-        void startMoving(Movable entity) {
+        public void startMoving(Movable entity) {
             entity.moveRight(true);
         }
 
         @Override
-        void stopMoving(Movable entity) {
+        public void stopMoving(Movable entity) {
             entity.moveRight(false);
         }
     };
@@ -73,7 +73,7 @@ public enum MovableEventType {
         return keyCodes;
     }
 
-    abstract void startMoving(Movable entity);
+    public abstract void startMoving(Movable entity);
 
-    abstract void stopMoving(Movable entity);
+    public abstract void stopMoving(Movable entity);
 }
