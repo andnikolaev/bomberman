@@ -48,7 +48,6 @@ public class GameField {
         for (int i = 0; i < levelChars.length; i++) {
             for (int j = 0; j < levelChars[i].length; j++) {
                 if (levelChars[i][j] == 'p') {
-                    //TODO вынести скорость
                     player = new Player(j, i, Settings.PLAYER_SPEED, updatableModel, this);
                 }
             }

@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 public class BrickView implements LevelView {
     @Override
     public void render(Graphics2D graphics, Block block) {
-        graphics.setColor(new Color(235, 24, 255));
+        graphics.setColor(new Color(139,69,19));
         graphics.fill(new Rectangle2D.Double(
                 block.getX() * GameScreenParameters.getScaleXTest(),
                 block.getY() * GameScreenParameters.getScaleYTest(),
