@@ -1,5 +1,6 @@
 package ru.rsreu.nikolaev0211.model;
 
+import ru.rsreu.nikolaev0211.Settings;
 import ru.rsreu.nikolaev0211.model.bomb.Bomb;
 import ru.rsreu.nikolaev0211.model.level.Block;
 import ru.rsreu.nikolaev0211.model.level.Brick;
@@ -46,7 +47,7 @@ public class GameField {
             for (int j = 0; j < levelChars[i].length; j++) {
                 if (levelChars[i][j] == 'p') {
                     //TODO вынести скорость
-                    player = new Player(j, i, 0.25, updatableModel);
+                    player = new Player(j, i, Settings.PLAYER_SPEED, updatableModel, this);
                 }
             }
         }
@@ -59,12 +60,10 @@ public class GameField {
         for (int i = 0; i < levelChars.length; i++) {
             for (int j = 0; j < levelChars[i].length; j++) {
                 if (levelChars[i][j] == '1') {
-                    mobs.add(new SimpleMonster(j, i, 0.25, updatableModel, new EasyAI()));
-                    //TODO вынести скорость
+                    mobs.add(new SimpleMonster(j, i, Settings.EASY_MOB_SPEED, updatableModel, new EasyAI(), this));
                 }
                 if (levelChars[i][j] == '2') {
-                    mobs.add(new SimpleMonster(j, i, 0.25, updatableModel, new MediumAI()));
-                    //TODO вынести скорость
+                    mobs.add(new SimpleMonster(j, i, Settings.MEDIUM_MOB_SPEED, updatableModel, new MediumAI(), this));
                 }
             }
         }
@@ -85,6 +84,22 @@ public class GameField {
             }
         }
         return blocks;
+    }
+
+    public boolean checkCell(int x, int y) {
+        if (!level.checkCell(x, y)) {
+            return false;
+        }
+
+        if (bombs != null) {
+            for (Bomb bomb : bombs) {
+                if (bomb.getX() == x || bomb.getY() == y) {
+                    return false;
+                }
+            }
+        }
+        return true;
+
     }
 
     public GameField(int width, int height) {

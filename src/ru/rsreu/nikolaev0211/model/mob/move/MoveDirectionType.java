@@ -6,22 +6,26 @@ public enum MoveDirectionType {
         public MoveDirection getMoveDirection() {
             return new MoveDirection(0, 1);
         }
-    }, DOWN() {
+    },
+    DOWN() {
         @Override
         public MoveDirection getMoveDirection() {
             return new MoveDirection(0, -1);
         }
-    }, LEFT() {
+    },
+    LEFT() {
         @Override
         public MoveDirection getMoveDirection() {
             return new MoveDirection(-1, 0);
         }
-    }, RIGHT() {
+    },
+    RIGHT() {
         @Override
         public MoveDirection getMoveDirection() {
             return new MoveDirection(1, 0);
         }
-    }, NONE() {
+    },
+    NONE() {
         @Override
         public MoveDirection getMoveDirection() {
             return new MoveDirection(0, 0);

@@ -2,16 +2,18 @@ package ru.rsreu.nikolaev0211.model.mob;
 
 import ru.rsreu.nikolaev0211.events.EventType;
 import ru.rsreu.nikolaev0211.model.Game;
+import ru.rsreu.nikolaev0211.model.GameField;
 import ru.rsreu.nikolaev0211.model.GameState;
 import ru.rsreu.nikolaev0211.model.UpdatableModel;
+import ru.rsreu.nikolaev0211.model.mob.level.Level;
 import ru.rsreu.nikolaev0211.model.mob.move.Movable;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirection;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirectionType;
 
 public class Player extends Mob implements Movable {
 
-    public Player(double x, double y, double mobSpeed, UpdatableModel gameModel) {
-        super(x, y, mobSpeed, gameModel, false, true, MoveDirectionType.NONE);
+    public Player(double x, double y, double mobSpeed, UpdatableModel gameModel, GameField gameField) {
+        super(x, y, mobSpeed, gameModel, false, true, MoveDirectionType.NONE, gameField);
     }
 
     @Override

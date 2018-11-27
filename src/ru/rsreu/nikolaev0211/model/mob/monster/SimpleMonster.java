@@ -2,9 +2,11 @@ package ru.rsreu.nikolaev0211.model.mob.monster;
 
 import ru.rsreu.nikolaev0211.events.EventType;
 import ru.rsreu.nikolaev0211.model.Game;
+import ru.rsreu.nikolaev0211.model.GameField;
 import ru.rsreu.nikolaev0211.model.GameState;
 import ru.rsreu.nikolaev0211.model.UpdatableModel;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
+import ru.rsreu.nikolaev0211.model.mob.level.Level;
 import ru.rsreu.nikolaev0211.model.mob.monster.AI.AI;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirection;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirectionType;
@@ -12,8 +14,8 @@ import ru.rsreu.nikolaev0211.model.mob.move.MoveDirectionType;
 public class SimpleMonster extends Mob {
     private AI ai;
 
-    public SimpleMonster(double x, double y, double mobSpeed, UpdatableModel gameModel, AI ai) {
-        super(x, y, mobSpeed, gameModel, false, true, MoveDirectionType.NONE);
+    public SimpleMonster(double x, double y, double mobSpeed, UpdatableModel gameModel, AI ai, GameField gameField) {
+        super(x, y, mobSpeed, gameModel, false, true, MoveDirectionType.NONE, gameField);
         this.ai = ai;
     }
 
@@ -31,7 +33,7 @@ public class SimpleMonster extends Mob {
     public void run() {
         while (this.isAlive) {
             if (GameState.RUNNING.equals(Game.getGameState())) {
-                calculateMove();
+//                calculateMove();
             }
             try {
                 Thread.sleep(800);

@@ -32,4 +32,8 @@ public class Level {
     public int getRows() {
         return level.length;
     }
+
+    public boolean checkCell(int x, int y) {
+        return level[y][x] != '*' && level[y][x] != '#';
+    }
 }
