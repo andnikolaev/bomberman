@@ -2,10 +2,14 @@ package ru.rsreu.nikolaev0211.view;
 
 import ru.rsreu.nikolaev0211.model.GameData;
 import ru.rsreu.nikolaev0211.model.GameField;
+import ru.rsreu.nikolaev0211.model.bomb.Bomb;
+import ru.rsreu.nikolaev0211.model.bomb.Explosion;
 import ru.rsreu.nikolaev0211.model.level.Block;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
 import ru.rsreu.nikolaev0211.view.mob.MonsterView;
 import ru.rsreu.nikolaev0211.view.mob.PlayerView;
+import ru.rsreu.nikolaev0211.view.object.BombView;
+import ru.rsreu.nikolaev0211.view.object.ExplosionView;
 import ru.rsreu.nikolaev0211.view.object.level.BlockView;
 
 import java.awt.*;
@@ -17,12 +21,31 @@ public class FieldView implements Renderable {
     private BlockView blockView = new BlockView();
     private PlayerView playerView = new PlayerView();
     private MonsterView monsterView = new MonsterView();
+    private BombView bombView = new BombView();
+    private ExplosionView explosionView = new ExplosionView();
+
 
     @Override
     public void render(Graphics2D graphics, GameData gameData) {
         renderGameField(graphics, gameData.getGameField());
+        renderBombs(graphics, gameData.getBomb());
+        renderExplosions(graphics, gameData.getGameField().getExplosionList());
         renderPlayer(graphics, gameData.getPlayer());
         renderMonsters(graphics, gameData.getMonsters());
+    }
+
+    private void renderExplosions(Graphics2D graphics, List<Explosion> explosionList) {
+        for (Explosion explosion : explosionList) {
+            explosionView.render(graphics, explosion);
+        }
+    }
+
+    private void renderBombs(Graphics2D graphics, List<Bomb> bombs) {
+        if (bombs != null) {
+            for (Bomb bomb : bombs) {
+                bombView.render(graphics, bomb);
+            }
+        }
     }
 
     private void renderGameField(Graphics2D graphics, GameField gameField) {

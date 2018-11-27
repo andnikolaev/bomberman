@@ -1,4 +1,4 @@
-package ru.rsreu.nikolaev0211.model.mob.level;
+package ru.rsreu.nikolaev0211.model.level;
 
 import java.io.*;
 

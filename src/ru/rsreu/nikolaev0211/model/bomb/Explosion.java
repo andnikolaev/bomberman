@@ -6,24 +6,22 @@ import ru.rsreu.nikolaev0211.model.Game;
 import ru.rsreu.nikolaev0211.model.GameState;
 import ru.rsreu.nikolaev0211.model.UpdatableModel;
 
-public class Bomb implements Runnable {
-
+public class Explosion implements Runnable {
     private UpdatableModel model;
     private boolean isAlive;
     private int x;
     private int y;
 
-    public Bomb(int x, int y, UpdatableModel model) {
+    public Explosion(int x, int y, UpdatableModel model) {
         this.x = x;
         this.y = y;
         this.model = model;
         this.isAlive = true;
     }
 
-    private void boom() {
-        System.out.println("Bomb made boommm!!! on x = " + x + " y = " + y);
+    private void explosionFinish() {
         isAlive = false;
-        model.update(EventType.BOMB_UPDATE);
+        model.update(EventType.EXPLOSION_UPDATE);
     }
 
     @Override
@@ -31,8 +29,8 @@ public class Bomb implements Runnable {
         long startTime = System.currentTimeMillis();
         isAlive = true;
         while (isAlive && GameState.RUNNING.equals(Game.getGameState())) {
-            if (System.currentTimeMillis() - startTime > Settings.BOMB_ALIVE_TIME) {
-                boom();
+            if (System.currentTimeMillis() - startTime > Settings.EXPLOSION_TIME) {
+                explosionFinish();
             }
         }
     }
@@ -70,4 +68,5 @@ public class Bomb implements Runnable {
                 ", y=" + y +
                 '}';
     }
+
 }

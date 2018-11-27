@@ -2,18 +2,18 @@ package ru.rsreu.nikolaev0211.model;
 
 import ru.rsreu.nikolaev0211.Settings;
 import ru.rsreu.nikolaev0211.model.bomb.Bomb;
+import ru.rsreu.nikolaev0211.model.bomb.Explosion;
 import ru.rsreu.nikolaev0211.model.level.Block;
 import ru.rsreu.nikolaev0211.model.level.Brick;
 import ru.rsreu.nikolaev0211.model.level.Wall;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
 import ru.rsreu.nikolaev0211.model.mob.Player;
-import ru.rsreu.nikolaev0211.model.mob.level.Level;
+import ru.rsreu.nikolaev0211.model.level.Level;
 import ru.rsreu.nikolaev0211.model.mob.monster.AI.EasyAI;
 import ru.rsreu.nikolaev0211.model.mob.monster.AI.MediumAI;
 import ru.rsreu.nikolaev0211.model.mob.monster.SimpleMonster;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class GameField {
     private UpdatableModel updatableModel;
@@ -25,6 +25,7 @@ public class GameField {
     private List<Mob> mobs;
     private List<Block> blocks;
     private List<Bomb> bombs;
+    private List<Explosion> explosionList;
 
     public GameField(UpdatableModel updatableModel, Level level) {
         this.level = level;
@@ -38,6 +39,7 @@ public class GameField {
         player = initPlayer();
         mobs = initMobs();
         blocks = initBlocks();
+        explosionList = new ArrayList<Explosion>();
     }
 
     private Player initPlayer() {
@@ -86,18 +88,48 @@ public class GameField {
         return blocks;
     }
 
+    public boolean checkCellOnExplosion(int x, int y) {
+        if (!level.explosionCell(x, y)) {
+            return false;
+        }
+        explosionBlock(x, y);
+        explosionEnemy(x, y);
+        return true;
+    }
+
+    private void explosionEnemy(int x, int y) {
+        Iterator<Mob> iterator = mobs.iterator();
+        while (iterator.hasNext()) {
+            Mob mob = iterator.next();
+            if (((int) Math.floor(mob.getX()) == x && (int) Math.floor(mob.getY()) == y)
+                    || ((int) Math.floor(mob.getX() + 0.95) == x && (int) Math.floor(mob.getY() + 0.95) == y)) {
+                iterator.remove();
+            }
+        }
+    }
+
+    private void explosionBlock(int x, int y) {
+        Iterator<Block> iterator = blocks.iterator();
+        while (iterator.hasNext()) {
+            Block block = iterator.next();
+            if (block.getX() == x && block.getY() == y) {
+                iterator.remove();
+            }
+        }
+    }
+
     public boolean checkCell(int x, int y) {
         if (!level.checkCell(x, y)) {
             return false;
         }
 
-        if (bombs != null) {
-            for (Bomb bomb : bombs) {
-                if (bomb.getX() == x || bomb.getY() == y) {
-                    return false;
-                }
-            }
-        }
+//        if (bombs != null) {
+//            for (Bomb bomb : bombs) {
+//                if (bomb.getX() == x || bomb.getY() == y) {
+//                    return false;
+//                }
+//            }
+//        }
         return true;
 
     }
@@ -170,5 +202,15 @@ public class GameField {
     public void setBombs(List<Bomb> bombs) {
         this.bombs = bombs;
     }
+
+    public List<Explosion> getExplosionList() {
+        return explosionList;
+    }
+
+    public void setExplosionList(List<Explosion> explosionList) {
+        this.explosionList = explosionList;
+    }
+
+
 }
 

@@ -10,7 +10,7 @@ import java.awt.geom.Rectangle2D;
 public class PlayerView implements MobView {
     @Override
     public void render(Graphics2D graphics, Mob mob) {
-        graphics.setColor(new Color(180, 255, 45));
+        graphics.setColor(new Color(47, 255, 172));
         graphics.fill(new Ellipse2D.Double(
                 mob.getX() * GameScreenParameters.getScaleXTest(),
                 mob.getY() * GameScreenParameters.getScaleYTest(),

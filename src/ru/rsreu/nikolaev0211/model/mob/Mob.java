@@ -2,7 +2,6 @@ package ru.rsreu.nikolaev0211.model.mob;
 
 import ru.rsreu.nikolaev0211.model.GameField;
 import ru.rsreu.nikolaev0211.model.UpdatableModel;
-import ru.rsreu.nikolaev0211.model.mob.level.Level;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirectionType;
 
 public abstract class Mob implements Runnable {

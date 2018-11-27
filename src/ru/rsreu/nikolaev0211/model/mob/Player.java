@@ -5,7 +5,6 @@ import ru.rsreu.nikolaev0211.model.Game;
 import ru.rsreu.nikolaev0211.model.GameField;
 import ru.rsreu.nikolaev0211.model.GameState;
 import ru.rsreu.nikolaev0211.model.UpdatableModel;
-import ru.rsreu.nikolaev0211.model.mob.level.Level;
 import ru.rsreu.nikolaev0211.model.mob.move.Movable;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirection;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirectionType;

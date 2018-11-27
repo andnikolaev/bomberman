@@ -6,7 +6,6 @@ import ru.rsreu.nikolaev0211.model.GameField;
 import ru.rsreu.nikolaev0211.model.GameState;
 import ru.rsreu.nikolaev0211.model.UpdatableModel;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
-import ru.rsreu.nikolaev0211.model.mob.level.Level;
 import ru.rsreu.nikolaev0211.model.mob.monster.AI.AI;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirection;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirectionType;
@@ -33,7 +32,7 @@ public class SimpleMonster extends Mob {
     public void run() {
         while (this.isAlive) {
             if (GameState.RUNNING.equals(Game.getGameState())) {
-//                calculateMove();
+                calculateMove();
             }
             try {
                 Thread.sleep(800);
@@ -41,6 +40,10 @@ public class SimpleMonster extends Mob {
                 e.printStackTrace();
             }
         }
+    }
+
+    public AI getAi() {
+        return ai;
     }
 
     @Override

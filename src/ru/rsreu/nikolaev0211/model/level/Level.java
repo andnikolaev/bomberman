@@ -1,4 +1,4 @@
-package ru.rsreu.nikolaev0211.model.mob.level;
+package ru.rsreu.nikolaev0211.model.level;
 
 public class Level {
     private int number;
@@ -35,5 +35,13 @@ public class Level {
 
     public boolean checkCell(int x, int y) {
         return level[y][x] != '*' && level[y][x] != '#';
+    }
+
+    public boolean explosionCell(int x, int y) {
+        if (level[y][x] == '*') {
+            level[y][x] = ' ';
+            return true;
+        }
+        return level[y][x] != '#';
     }
 }
