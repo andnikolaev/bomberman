@@ -5,8 +5,11 @@ import java.awt.*;
 import static ru.rsreu.nikolaev0211.Settings.*;
 
 public class GameScreenParameters {
-    private static final double SCALE_X = ORIGINAL_WIDTH / ORIGINAL_BLOCK_SIZE; // 28
-    private static final double SCALE_Y = ORIGINAL_HEIGHT / ORIGINAL_BLOCK_SIZE; // 31
+    private static int ScaleXTest;
+    private static int ScaleYTest;
+
+    private static final double SCALE_X = ORIGINAL_WIDTH / 1; // 28
+    private static final double SCALE_Y = ORIGINAL_HEIGHT / 1; // 31
 
     private double x = 1;
     private double y = 1;
@@ -14,7 +17,24 @@ public class GameScreenParameters {
     private double width;
     private double height;
 
-    public void resized(Dimension dimension) {
+    public double getWidthTest() {
+        return widthTest;
+    }
+
+    public double getHeightTest() {
+        return heightTest;
+    }
+
+    private double widthTest;
+    private double heightTest;
+
+    private int rows;
+    private int columns;
+
+    public void resize(Dimension dimension) {
+        this.widthTest = dimension.getWidth();
+        this.heightTest = dimension.getHeight();
+
         calcScale(dimension);
 
         this.x = this.width / ORIGINAL_WIDTH;
@@ -25,7 +45,7 @@ public class GameScreenParameters {
         double canvasWidth = dimension.getWidth();
         this.height = dimension.getHeight();
         this.width = calculateWidth(this.height);
-
+        calculateScale();
         if (this.width > canvasWidth) {
             this.width = canvasWidth;
             this.height = calculateHeight(this.width);
@@ -58,5 +78,39 @@ public class GameScreenParameters {
 
     public double getY() {
         return y;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    private void calculateScale() {
+        if (columns != 0 && rows != 0) {
+            GameScreenParameters.ScaleXTest = (int) widthTest / columns;
+            GameScreenParameters.ScaleYTest = (int) heightTest / rows;
+        }
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+        calculateScale();
+    }
+
+    public static int getScaleXTest() {
+        return ScaleXTest;
+    }
+
+
+    public static int getScaleYTest() {
+        return ScaleYTest;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+        calculateScale();
     }
 }

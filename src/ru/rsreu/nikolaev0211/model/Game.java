@@ -4,21 +4,16 @@ import ru.rsreu.nikolaev0211.events.EventManager;
 import ru.rsreu.nikolaev0211.events.EventType;
 import ru.rsreu.nikolaev0211.model.bomb.Bomb;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
-import ru.rsreu.nikolaev0211.model.mob.Player;
-import ru.rsreu.nikolaev0211.model.mob.monster.AI.EasyAI;
-import ru.rsreu.nikolaev0211.model.mob.monster.SimpleMonster;
+import ru.rsreu.nikolaev0211.model.mob.level.Level;
+import ru.rsreu.nikolaev0211.model.mob.level.LevelReader;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class Game implements UpdatableModel, BombermanAction {
     private volatile static GameState gameState = GameState.NEW;
     private GameField gameField;
-    private List<Mob> monsters;
-    private Player player;
     private EventManager eventManager;
-    private List<Bomb> bombs;
 
     public Game(EventManager eventManager) {
         this.eventManager = eventManager;
@@ -27,34 +22,30 @@ public class Game implements UpdatableModel, BombermanAction {
     }
 
     private void initModel() {
-        Player player = new Player(0, 0, 1, this);
-        List<Mob> monsterList = new ArrayList<Mob>();
-        monsterList.add(new SimpleMonster(0, 0, 1, this, new EasyAI()));
-        monsterList.add(new SimpleMonster(0, 0, 1, this, new EasyAI()));
+        LevelReader levelReader = new LevelReader();
+        Level level = levelReader.readLevel("C:\\Users\\Andrey_Nikolaev\\Downloads\\bomberman-master (3)\\02-11-Nikolaev\\resources\\Level.txt");
 
-        GameField gameField = new GameField();
+        GameField gameField = new GameField(this, level);
         setGameField(gameField);
-        setMonsters(monsterList);
-        setPlayer(player);
     }
 
     private void startModel() {
-        Thread thread = new Thread(player);
+        Thread thread = new Thread(gameField.getPlayer());
         thread.start();
-        for (Mob mob : monsters) {
+        for (Mob mob : gameField.getMobs()) {
             thread = new Thread(mob);
             thread.start();
         }
     }
 
     public void newGame() {
-        eventManager.notify(EventType.MODEL_UPDATE, new GameData(gameField, monsters, player, bombs, gameState));
+        eventManager.notify(EventType.MODEL_UPDATE, createGameData());
     }
 
     @Override
     public void start() {
         gameState = GameState.RUNNING;
-        eventManager.notify(EventType.MODEL_UPDATE, new GameData(gameField, monsters, player, bombs, gameState));
+        eventManager.notify(EventType.MODEL_UPDATE, createGameData());
     }
 
     @Override
@@ -62,11 +53,11 @@ public class Game implements UpdatableModel, BombermanAction {
         if (EventType.BOMB_UPDATE.equals(eventType)) {
             clearBomb();
         }
-        eventManager.notify(EventType.MODEL_UPDATE, new GameData(gameField, monsters, player, bombs, gameState));
+        eventManager.notify(EventType.MODEL_UPDATE, createGameData());
     }
 
     private void clearBomb() {
-        Iterator<Bomb> iterator = bombs.iterator();
+        Iterator<Bomb> iterator = gameField.getBombs().iterator();
 
         while (iterator.hasNext()) {
             Bomb element = iterator.next();
@@ -78,11 +69,11 @@ public class Game implements UpdatableModel, BombermanAction {
 
     @Override
     public void placeBomb() {
-        Bomb bomb = new Bomb(player.getX(), player.getY(), this);
-        if (bombs == null) {
-            bombs = new ArrayList<Bomb>();
+        Bomb bomb = new Bomb(gameField.getPlayer().getX(), gameField.getPlayer().getY(), this);
+        if (gameField.getBombs() == null) {
+            gameField.setBombs(new ArrayList<Bomb>());
         }
-        bombs.add(bomb);
+        gameField.getBombs().add(bomb);
         Thread thread = new Thread(bomb);
         thread.start();
         update(EventType.MODEL_UPDATE);
@@ -105,6 +96,10 @@ public class Game implements UpdatableModel, BombermanAction {
         return isPaused;
     }
 
+    private GameData createGameData() {
+        return new GameData(gameField, gameField.getMobs(), gameField.getPlayer(), gameField.getBombs(), gameState);
+    }
+
     public EventManager getEventManager() {
         return eventManager;
     }
@@ -121,21 +116,6 @@ public class Game implements UpdatableModel, BombermanAction {
         this.gameField = gameField;
     }
 
-    public List<Mob> getMonsters() {
-        return monsters;
-    }
-
-    public void setMonsters(List<Mob> monsters) {
-        this.monsters = monsters;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 
     public static GameState getGameState() {
         return Game.gameState;

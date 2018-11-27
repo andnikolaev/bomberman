@@ -4,26 +4,12 @@ import ru.rsreu.nikolaev0211.controller.GameController;
 import ru.rsreu.nikolaev0211.events.EventManager;
 import ru.rsreu.nikolaev0211.events.EventType;
 import ru.rsreu.nikolaev0211.model.Game;
-import ru.rsreu.nikolaev0211.model.GameData;
-import ru.rsreu.nikolaev0211.model.GameField;
-import ru.rsreu.nikolaev0211.model.GameState;
-import ru.rsreu.nikolaev0211.model.mob.Mob;
-import ru.rsreu.nikolaev0211.model.mob.Player;
-import ru.rsreu.nikolaev0211.model.mob.level.Level;
-import ru.rsreu.nikolaev0211.model.mob.level.LevelReader;
-import ru.rsreu.nikolaev0211.model.mob.monster.AI.EasyAI;
-import ru.rsreu.nikolaev0211.model.mob.monster.SimpleMonster;
 import ru.rsreu.nikolaev0211.view.GameView;
 import ru.rsreu.nikolaev0211.view.Keyboard;
-import sun.security.krb5.internal.TGSRep;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.io.BufferedReader;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Bomberman {
     public Bomberman() {
@@ -33,8 +19,7 @@ public class Bomberman {
     public static void main(String[] args) {
         Bomberman bomberman = new Bomberman();
         bomberman.startGame();
-//        LevelReader levelReader = new LevelReader();
-//        Level level = levelReader.readLevel("C:\\Users\\Andrey_Nikolaev\\Downloads\\bomberman-master (3)\\02-11-Nikolaev\\resources\\Level.txt");
+//
 
     }
 

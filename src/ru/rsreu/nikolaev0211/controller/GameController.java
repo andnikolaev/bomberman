@@ -13,11 +13,11 @@ public class GameController {
 
 
     public void startMoving(MovableEventType movableEventType) {
-        movableEventType.startMoving(game.getPlayer());
+        movableEventType.startMoving(game.getGameField().getPlayer());
     }
 
     public void stopMoving(MovableEventType movableEventType) {
-        movableEventType.stopMoving(game.getPlayer());
+        movableEventType.stopMoving(game.getGameField().getPlayer());
     }
 
     public void startAction(GameEventType gameEventType) {

@@ -1,12 +1,11 @@
 package ru.rsreu.nikolaev0211;
 
 public class Settings {
-    public static final int BLOCK_WIDTH = 8;
-    public static final int BLOCK_HEIGHT = 8;
-
     public static final double ORIGINAL_WIDTH = 224.0;
     public static final double ORIGINAL_HEIGHT = 248.0;
-    public static final int ORIGINAL_BLOCK_SIZE = 8;
 
-    public static final int FOOD_FOR_WIN = 10;
+    public static final double PLAYER_SPEED = 0.25;
+    public static final double EASY_MOB_SPEED = 0.25;
+    public static final double MEDIUM_MOB_SPEED = 0.5;
+
 }

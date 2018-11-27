@@ -24,4 +24,12 @@ public class Level {
     public void setLevel(char[][] level) {
         this.level = level;
     }
+
+    public int getColumns() {
+        return level[0].length;
+    }
+
+    public int getRows() {
+        return level.length;
+    }
 }

@@ -1,5 +1,6 @@
 package ru.rsreu.nikolaev0211.view.notification;
 
+import ru.rsreu.nikolaev0211.model.GameData;
 import ru.rsreu.nikolaev0211.view.Renderable;
 
 import java.awt.*;
@@ -14,7 +15,7 @@ public class PausedGameNotification implements Renderable {
     private static final Color COLOR = new Color(47, 0, 18);
 
     @Override
-    public void render(Graphics2D graphics) {
+    public void render(Graphics2D graphics, GameData gameData) {
         graphics.setColor(COLOR);
         graphics.fillRect(
                 X_POSITION,

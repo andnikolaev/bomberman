@@ -43,6 +43,14 @@ public abstract class Mob implements Runnable {
         }
     }
 
+    public double getX() {
+        return x;
+    }
+    
+    public double getY() {
+        return y;
+    }
+
     @Override
     public String toString() {
         return "Mob{" +

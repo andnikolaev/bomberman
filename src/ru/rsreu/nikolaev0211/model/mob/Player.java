@@ -9,6 +9,7 @@ import ru.rsreu.nikolaev0211.model.mob.move.MoveDirection;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirectionType;
 
 public class Player extends Mob implements Movable {
+
     public Player(double x, double y, double mobSpeed, UpdatableModel gameModel) {
         super(x, y, mobSpeed, gameModel, false, true, MoveDirectionType.NONE);
     }
@@ -16,13 +17,13 @@ public class Player extends Mob implements Movable {
     @Override
     public void moveUp(boolean isMove) {
         this.isMoving = isMove;
-        this.moveDirection = MoveDirectionType.UP;
+        this.moveDirection = MoveDirectionType.DOWN;
     }
 
     @Override
     public void moveDown(boolean isMove) {
         this.isMoving = isMove;
-        this.moveDirection = MoveDirectionType.DOWN;
+        this.moveDirection = MoveDirectionType.UP;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class Player extends Mob implements Movable {
                 calculateMove();
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
