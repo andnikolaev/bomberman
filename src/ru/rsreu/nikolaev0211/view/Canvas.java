@@ -44,12 +44,12 @@ public class Canvas extends JPanel {
             gameScreenParameters.setColumns(data.getGameField().getWidth());
             gameScreenParameters.setRows(data.getGameField().getHeight());
 
-            fieldView.render(g2, data);
-            scoreView.render(g2, data.getScore(), this);
+            fieldView.render(g2, data, this);
+            scoreView.render(g2, data, this);
             GameState gameStatus = data.getGameState();
             if (!GameState.RUNNING.equals(gameStatus)) {
                 Renderable renderable = NotificationViewType.getNotificationView(gameStatus);
-                renderable.render(g2, data);
+                renderable.render(g2, data, this);
             }
         }
     }

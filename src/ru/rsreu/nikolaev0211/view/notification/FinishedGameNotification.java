@@ -1,6 +1,7 @@
 package ru.rsreu.nikolaev0211.view.notification;
 
 import ru.rsreu.nikolaev0211.model.GameData;
+import ru.rsreu.nikolaev0211.view.Canvas;
 import ru.rsreu.nikolaev0211.view.Renderable;
 
 import java.awt.*;
@@ -8,28 +9,19 @@ import java.awt.*;
 public class FinishedGameNotification implements Renderable {
     private static final int X_POSITION = 20;
     private static final int Y_POSITION = 90;
-    private static final int Y_OFFSET = 15;
-    private static final int WIDTH = 160;
-    private static final int HEIGHT = 20;
     private static final int FONT_SIZE = 68;
-
-//    private static final Color COLOR = new Color(47, 0, 18);
+    private static final String GAME_FINISHED = "Game finished your score = %s";
+    private static final String FONT_TYPE = "TimesRoman";
 
     @Override
-    public void render(Graphics2D graphics, GameData gameData) {
-//        graphics.setColor(COLOR);
-//        graphics.fillRect(
-//                X_POSITION,
-//                Y_POSITION - Y_OFFSET,
-//                WIDTH,
-//                HEIGHT
-//        );
-        graphics.setFont(new Font("TimesRoman", Font.PLAIN, FONT_SIZE));
+    public void render(Graphics2D graphics, GameData gameData, Canvas canvas) {
+
+        graphics.setFont(new Font(FONT_TYPE, Font.PLAIN, FONT_SIZE));
         graphics.setColor(Color.WHITE);
         graphics.drawString(
-                "Game finished your score = 1000",
+                String.format(GAME_FINISHED, gameData.getScore()),
                 X_POSITION,
-                Y_POSITION
+                canvas.getHeight() / 2 - Y_POSITION
         );
     }
 }
