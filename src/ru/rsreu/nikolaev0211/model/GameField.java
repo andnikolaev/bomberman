@@ -26,6 +26,7 @@ public class GameField {
     private List<Block> blocks;
     private List<Bomb> bombs;
     private List<Explosion> explosionList;
+    private int score = 0;
 
     public GameField(UpdatableModel updatableModel, Level level) {
         this.level = level;
@@ -111,6 +112,7 @@ public class GameField {
             if (((int) Math.floor(mob.getX()) == x && (int) Math.floor(mob.getY()) == y)
                     || ((int) Math.floor(mob.getX() + 0.95) == x && (int) Math.floor(mob.getY() + 0.95) == y)) {
                 iterator.remove();
+                score += (int) Settings.SCORE_FOR_EXPLOSION_ENEMY;
             }
         }
     }
@@ -121,8 +123,26 @@ public class GameField {
             Block block = iterator.next();
             if (block.getX() == x && block.getY() == y) {
                 iterator.remove();
+                score += (int) Settings.SCORE_FOR_EXPLOSION_BLOCK;
             }
         }
+    }
+
+    private void checkOnDieFromMonster(double playerX, double playerY, double mobX, double mobY) {
+        if (Math.abs(playerX - mobX) < 0.95 && Math.abs(playerY - mobY) < 0.95) {
+            Game.setGameState(GameState.FINISHED);
+        }
+    }
+
+    public void checkCellForAction(double x, double y) {
+        for (Explosion explosion : explosionList) {
+            explosionPlayer(explosion.getX(), explosion.getY());
+        }
+
+        for (Mob mob : mobs) {
+            checkOnDieFromMonster(x, y, mob.getX(), mob.getY());
+        }
+
     }
 
     public boolean checkCell(int x, int y) {
@@ -214,10 +234,17 @@ public class GameField {
         return explosionList;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void setExplosionList(List<Explosion> explosionList) {
         this.explosionList = explosionList;
     }
-
 
 }
 

@@ -80,6 +80,10 @@ public abstract class Mob implements Runnable {
         }
     }
 
+    protected void checkCellForAction(double x, double y) {
+        gameField.checkCellForAction(x, y);
+    }
+
     public double getX() {
         return x;
     }

@@ -11,6 +11,8 @@ public class Settings {
     public static final double BOMB_ALIVE_TIME = 3000;
     public static final double EXPLOSION_STRANGE = 1;
     public static final double BOMB_COUNT = 1;
+    public static final double SCORE_FOR_EXPLOSION_ENEMY = 100;
+    public static final double SCORE_FOR_EXPLOSION_BLOCK = 10;
 
 
 }
