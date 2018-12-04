@@ -113,8 +113,16 @@ public class GameField {
             Mob mob = iterator.next();
             if (((int) Math.floor(mob.getX()) == x && (int) Math.floor(mob.getY()) == y)
                     || ((int) Math.floor(mob.getX() + 0.95) == x && (int) Math.floor(mob.getY() + 0.95) == y)) {
-                iterator.remove();
-                score += (int) Settings.SCORE_FOR_EXPLOSION_ENEMY;
+                SimpleMonster simpleMonster = (SimpleMonster) mob;
+                if (MediumAI.class.equals(simpleMonster.getAi().getClass())) {
+                    simpleMonster.setAi(new EasyAI());
+                    score += (int) Settings.SCORE_FOR_EXPLOSION_ENEMY / 2;
+                } else {
+                    iterator.remove();
+                    score += (int) Settings.SCORE_FOR_EXPLOSION_ENEMY;
+                }
+
+
             }
         }
     }

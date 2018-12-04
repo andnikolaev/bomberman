@@ -55,6 +55,10 @@ public class SimpleMonster extends Mob {
         return ai;
     }
 
+    public void setAi(AI ai) {
+        this.ai = ai;
+    }
+
     @Override
     public String toString() {
         return super.toString();
