@@ -84,6 +84,12 @@ public abstract class Mob implements Runnable {
         gameField.checkCellForAction(x, y);
     }
 
+    protected void checkCellForPortal(double x, double y) {
+        if (gameField.getMobs().isEmpty()) {
+            gameField.checkCellForPortal(x, y);
+        }
+    }
+
     public double getX() {
         return x;
     }
@@ -102,4 +108,6 @@ public abstract class Mob implements Runnable {
                 ", moveDirection=" + moveDirection +
                 '}';
     }
+
+
 }

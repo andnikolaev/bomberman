@@ -50,6 +50,7 @@ public class Game implements UpdatableModel, BombermanAction {
 
     @Override
     public void start() {
+      // initModel();
         gameState = GameState.RUNNING;
         eventManager.notify(EventType.MODEL_UPDATE, createGameData());
     }

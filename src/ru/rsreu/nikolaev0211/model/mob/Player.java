@@ -44,6 +44,7 @@ public class Player extends Mob implements Movable {
         MoveDirection moveDirection = this.moveDirection.getMoveDirection();
         this.move(moveDirection.getX() * this.mobSpeed, moveDirection.getY() * this.mobSpeed);
         this.checkCellForAction(x,y);
+        this.checkCellForPortal(x,y);
         this.gameModel.update(EventType.MODEL_UPDATE);
     }
 

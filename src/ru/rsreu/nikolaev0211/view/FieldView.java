@@ -5,6 +5,7 @@ import ru.rsreu.nikolaev0211.model.GameField;
 import ru.rsreu.nikolaev0211.model.bomb.Bomb;
 import ru.rsreu.nikolaev0211.model.bomb.Explosion;
 import ru.rsreu.nikolaev0211.model.level.Block;
+import ru.rsreu.nikolaev0211.model.level.Portal;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
 import ru.rsreu.nikolaev0211.view.mob.MonsterView;
 import ru.rsreu.nikolaev0211.view.mob.PlayerView;
@@ -27,11 +28,16 @@ public class FieldView implements Renderable {
 
     @Override
     public void render(Graphics2D graphics, GameData gameData) {
+        renderGameFieldPortal(graphics, gameData.getGameField().getPortal());
         renderGameField(graphics, gameData.getGameField());
         renderBombs(graphics, gameData.getBomb());
         renderExplosions(graphics, gameData.getGameField().getExplosionList());
         renderPlayer(graphics, gameData.getPlayer());
         renderMonsters(graphics, gameData.getMonsters());
+    }
+
+    private void renderGameFieldPortal(Graphics2D graphics, Portal portal) {
+        blockView.render(graphics, portal);
     }
 
     private void renderExplosions(Graphics2D graphics, List<Explosion> explosionList) {

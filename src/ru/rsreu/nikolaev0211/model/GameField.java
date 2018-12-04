@@ -3,12 +3,9 @@ package ru.rsreu.nikolaev0211.model;
 import ru.rsreu.nikolaev0211.Settings;
 import ru.rsreu.nikolaev0211.model.bomb.Bomb;
 import ru.rsreu.nikolaev0211.model.bomb.Explosion;
-import ru.rsreu.nikolaev0211.model.level.Block;
-import ru.rsreu.nikolaev0211.model.level.Brick;
-import ru.rsreu.nikolaev0211.model.level.Wall;
+import ru.rsreu.nikolaev0211.model.level.*;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
 import ru.rsreu.nikolaev0211.model.mob.Player;
-import ru.rsreu.nikolaev0211.model.level.Level;
 import ru.rsreu.nikolaev0211.model.mob.monster.AI.EasyAI;
 import ru.rsreu.nikolaev0211.model.mob.monster.AI.MediumAI;
 import ru.rsreu.nikolaev0211.model.mob.monster.SimpleMonster;
@@ -24,6 +21,7 @@ public class GameField {
     private Player player;
     private List<Mob> mobs;
     private List<Block> blocks;
+    private Portal portal;
     private List<Bomb> bombs;
     private List<Explosion> explosionList;
     private int score = 0;
@@ -81,6 +79,10 @@ public class GameField {
                     blocks.add(new Wall(j, i));
                 }
                 if (levelChars[i][j] == '*') {
+                    blocks.add(new Brick(j, i));
+                }
+                if (levelChars[i][j] == 'x') {
+                    portal = new Portal(j, i);
                     blocks.add(new Brick(j, i));
                 }
             }
@@ -143,6 +145,13 @@ public class GameField {
             checkOnDieFromMonster(x, y, mob.getX(), mob.getY());
         }
 
+    }
+
+    public void checkCellForPortal(double x, double y) {
+        if (((int) Math.floor(x) == portal.getX() && (int) Math.floor(y) == portal.getY())
+                || ((int) Math.floor(x + 0.95) == portal.getX() && (int) Math.floor(y + 0.95) == portal.getY())) {
+            Game.setGameState(GameState.FINISHED);
+        }
     }
 
     public boolean checkCell(int x, int y) {
@@ -245,6 +254,15 @@ public class GameField {
     public void setExplosionList(List<Explosion> explosionList) {
         this.explosionList = explosionList;
     }
+
+    public Portal getPortal() {
+        return portal;
+    }
+
+    public void setPortal(Portal portal) {
+        this.portal = portal;
+    }
+
 
 }
 
