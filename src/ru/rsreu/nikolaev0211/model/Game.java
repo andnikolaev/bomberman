@@ -28,7 +28,7 @@ public class Game implements UpdatableModel, BombermanAction {
 
     private void initModel() {
         LevelReader levelReader = new LevelReader();
-        Level level = levelReader.readLevel("C:\\Users\\Andrey_Nikolaev\\Downloads\\bomberman-master (3)\\02-11-Nikolaev\\resources\\Level.txt");
+        Level level = levelReader.readLevel("resources/Level.txt");
 
         GameField gameField = new GameField(this, level);
         setGameField(gameField);
