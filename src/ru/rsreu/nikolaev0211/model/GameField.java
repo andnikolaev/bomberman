@@ -37,7 +37,7 @@ public class GameField {
         this.width = level.getColumns();
         this.height = level.getRows();
         player = initPlayer();
-        mobs = initMobs();
+        mobs = initMobs(player);
         blocks = initBlocks();
         explosionList = new ArrayList<Explosion>();
     }
@@ -55,7 +55,7 @@ public class GameField {
         return player;
     }
 
-    private List<Mob> initMobs() {
+    private List<Mob> initMobs(Player player) {
         List<Mob> mobs = new LinkedList<Mob>();
         char[][] levelChars = level.getLevel();
         for (int i = 0; i < levelChars.length; i++) {
@@ -64,7 +64,7 @@ public class GameField {
                     mobs.add(new SimpleMonster(j, i, Settings.EASY_MOB_SPEED, updatableModel, new EasyAI(), this));
                 }
                 if (levelChars[i][j] == '2') {
-                    mobs.add(new SimpleMonster(j, i, Settings.MEDIUM_MOB_SPEED, updatableModel, new MediumAI(), this));
+                    mobs.add(new SimpleMonster(j, i, Settings.MEDIUM_MOB_SPEED, updatableModel, new MediumAI(player, level), this));
                 }
             }
         }
@@ -93,7 +93,15 @@ public class GameField {
         }
         explosionBlock(x, y);
         explosionEnemy(x, y);
+        explosionPlayer(x, y);
         return true;
+    }
+
+    private void explosionPlayer(int x, int y) {
+        if (((int) Math.floor(player.getX()) == x && (int) Math.floor(player.getY()) == y)
+                || ((int) Math.floor(player.getX() + 0.95) == x && (int) Math.floor(player.getY() + 0.95) == y)) {
+            Game.setGameState(GameState.FINISHED);
+        }
     }
 
     private void explosionEnemy(int x, int y) {

@@ -6,7 +6,9 @@ import ru.rsreu.nikolaev0211.model.GameField;
 import ru.rsreu.nikolaev0211.model.GameState;
 import ru.rsreu.nikolaev0211.model.UpdatableModel;
 import ru.rsreu.nikolaev0211.model.mob.Mob;
+import ru.rsreu.nikolaev0211.model.mob.Player;
 import ru.rsreu.nikolaev0211.model.mob.monster.AI.AI;
+import ru.rsreu.nikolaev0211.model.mob.monster.AI.MediumAI;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirection;
 import ru.rsreu.nikolaev0211.model.mob.move.MoveDirectionType;
 
@@ -16,9 +18,16 @@ public class SimpleMonster extends Mob {
     public SimpleMonster(double x, double y, double mobSpeed, UpdatableModel gameModel, AI ai, GameField gameField) {
         super(x, y, mobSpeed, gameModel, false, true, MoveDirectionType.NONE, gameField);
         this.ai = ai;
+        initAi();
     }
 
-    //TODO: выбор направления движения и движение
+    private void initAi() {
+        if (ai instanceof MediumAI) {
+            MediumAI mediumAI = (MediumAI) ai;
+            mediumAI.setMob(this);
+        }
+    }
+
     @Override
     public void calculateMove() {
         this.moveDirection = ai.calculateDirection();

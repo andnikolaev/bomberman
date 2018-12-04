@@ -81,9 +81,9 @@ public class GameView extends JFrame implements EventListener, Runnable {
 
     @Override
     public void run() {
-        while (!Game.getGameState().equals(GameState.FINISHED)) {
+        while (!Game.getGameState().equals(GameState.END)) {
             if (needUpdate) {
-             //   System.out.println(gameData);
+                //   System.out.println(gameData);
                 canvas.repaint(gameData);
             }
             needUpdate = false;

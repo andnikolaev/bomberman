@@ -19,6 +19,7 @@ public class Game implements UpdatableModel, BombermanAction {
     private GameField gameField;
     private EventManager eventManager;
     private int bombCount;
+    private int score = 100;
 
     public Game(EventManager eventManager) {
         this.eventManager = eventManager;
@@ -166,7 +167,7 @@ public class Game implements UpdatableModel, BombermanAction {
     }
 
     private GameData createGameData() {
-        return new GameData(gameField, gameField.getMobs(), gameField.getPlayer(), gameField.getBombs(), gameState);
+        return new GameData(gameField, gameField.getMobs(), gameField.getPlayer(), gameField.getBombs(), gameState, score);
     }
 
     public EventManager getEventManager() {

@@ -5,6 +5,7 @@ import ru.rsreu.nikolaev0211.model.GameState;
 import ru.rsreu.nikolaev0211.view.notification.FinishedGameNotification;
 import ru.rsreu.nikolaev0211.view.notification.NewGameNotification;
 import ru.rsreu.nikolaev0211.view.notification.PausedGameNotification;
+import ru.rsreu.nikolaev0211.view.object.ScoreView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ public class Canvas extends JPanel {
     private GameData data;
     private GameScreenParameters gameScreenParameters;
     private FieldView fieldView = new FieldView();
+    private ScoreView scoreView = new ScoreView();
 
     private Map<GameState, Renderable> notificationsScreen = new HashMap<GameState, Renderable>() {{
         put(GameState.NEW, new NewGameNotification());
@@ -48,7 +50,7 @@ public class Canvas extends JPanel {
             gameScreenParameters.setRows(data.getGameField().getHeight());
 
             fieldView.render(g2, data);
-
+            scoreView.render(g2, data.getScore(), this);
             GameState gameStatus = data.getGameState();
             if (!GameState.RUNNING.equals(gameStatus)) {
                 Renderable renderable = notificationsScreen.get(gameStatus);

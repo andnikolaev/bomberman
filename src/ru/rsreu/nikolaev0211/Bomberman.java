@@ -20,7 +20,6 @@ public class Bomberman {
         Bomberman bomberman = new Bomberman();
         bomberman.startGame();
 //
-
     }
 
     public void startGame() {

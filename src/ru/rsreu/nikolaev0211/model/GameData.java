@@ -11,16 +11,18 @@ public class GameData {
     private Mob player;
     private GameState gameState;
     private List<Bomb> bomb;
+    private int score;
 
     public GameData() {
     }
 
-    public GameData(GameField gameField, List<Mob> monsters, Mob player, List<Bomb> bomb, GameState gameState) {
+    public GameData(GameField gameField, List<Mob> monsters, Mob player, List<Bomb> bomb, GameState gameState, int score) {
         this.gameField = gameField;
         this.monsters = monsters;
         this.player = player;
         this.gameState = gameState;
         this.bomb = bomb;
+        this.score = score;
     }
 
     public GameField getGameField() {
@@ -61,6 +63,14 @@ public class GameData {
 
     public void setBomb(List<Bomb> bomb) {
         this.bomb = bomb;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     @Override
