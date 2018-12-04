@@ -80,9 +80,15 @@ public abstract class Mob implements Runnable {
         }
     }
 
-    protected void checkCellForAction(double x, double y) {
-        gameField.checkCellForAction(x, y);
+    protected void checkCellForPlayerAction(double x, double y) {
+        gameField.checkCellForPlayerAction(x, y);
     }
+
+    protected void checkCellForMobAction(double x, double y) {
+        gameField.checkCellForMobAction(x, y);
+    }
+
+
 
     protected void checkCellForPortal(double x, double y) {
         if (gameField.getMobs().isEmpty()) {

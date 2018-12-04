@@ -10,7 +10,10 @@ import ru.rsreu.nikolaev0211.model.mob.monster.AI.EasyAI;
 import ru.rsreu.nikolaev0211.model.mob.monster.AI.MediumAI;
 import ru.rsreu.nikolaev0211.model.mob.monster.SimpleMonster;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class GameField {
     private UpdatableModel updatableModel;
@@ -144,7 +147,7 @@ public class GameField {
         }
     }
 
-    public void checkCellForAction(double x, double y) {
+    public void checkCellForPlayerAction(double x, double y) {
         for (Explosion explosion : explosionList) {
             explosionPlayer(explosion.getX(), explosion.getY());
         }
@@ -153,6 +156,12 @@ public class GameField {
             checkOnDieFromMonster(x, y, mob.getX(), mob.getY());
         }
 
+    }
+
+    public void checkCellForMobAction(double x, double y) {
+        for (Mob mob : mobs) {
+            checkOnDieFromMonster(player.getX(), player.getY(), x, y);
+        }
     }
 
     public void checkCellForPortal(double x, double y) {

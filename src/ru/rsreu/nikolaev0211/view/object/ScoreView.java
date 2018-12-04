@@ -12,10 +12,11 @@ public class ScoreView implements Renderable {
     private static final int Y_POSITION = 40;
     private static final int FONT_SIZE = 18;
     private static final String SCORE = "Score: %s";
+    private static final String FONT_TYPE = "TimesRoman";
 
     @Override
     public void render(Graphics2D graphics, GameData gameData, Canvas canvas) {
-        graphics.setFont(new Font("TimesRoman", Font.PLAIN, FONT_SIZE));
+        graphics.setFont(new Font(FONT_TYPE, Font.PLAIN, FONT_SIZE));
         graphics.setColor(Color.WHITE);
 
         graphics.drawString(

@@ -43,7 +43,7 @@ public class Player extends Mob implements Movable {
     public void calculateMove() {
         MoveDirection moveDirection = this.moveDirection.getMoveDirection();
         this.move(moveDirection.getX() * this.mobSpeed, moveDirection.getY() * this.mobSpeed);
-        this.checkCellForAction(x,y);
+        this.checkCellForPlayerAction(x,y);
         this.checkCellForPortal(x,y);
         this.gameModel.update(EventType.MODEL_UPDATE);
     }

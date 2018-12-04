@@ -34,6 +34,7 @@ public class SimpleMonster extends Mob {
         this.isMoving = true;
         MoveDirection moveDirection = this.moveDirection.getMoveDirection();
         this.move(moveDirection.getX() * this.mobSpeed, moveDirection.getY() * this.mobSpeed);
+        this.checkCellForMobAction(x,y);
         this.gameModel.update(EventType.MODEL_UPDATE);
     }
 
